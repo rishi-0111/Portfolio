@@ -90,7 +90,7 @@ if (!prefersReducedMotion) {
     });
 
     gsap.from('.experience-card', { scrollTrigger: { trigger: '#experience', start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
-    gsap.from('.education-card', { scrollTrigger: { trigger: '#education', start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+    gsap.from('.education-card', { scrollTrigger: { trigger: '#education', start: 'top 90%', toggleActions: 'play none none none' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.15, ease: 'power3.out', clearProps: 'all' });
     gsap.from('.flip-card', { scrollTrigger: { trigger: '#certifications', start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
 
     document.querySelectorAll('.progress-fill').forEach((bar) => {
