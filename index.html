@@ -1,281 +1,1394 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="stylesheet.css">
-
+    <title>Reshi Arasu D | Full Stack Developer Portfolio</title>
+    <meta name="description"
+        content="Reshi Arasu D - Full Stack Developer specializing in web design, frontend, cloud engineering, AI, and IoT.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00eeff',
+                        dark: { 900: '#0a0e17', 800: '#0d1224', 700: '#111827', 600: '#1a2332' }
+                    },
+                    fontFamily: { outfit: ['Outfit', 'sans-serif'], inter: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-
+    <link rel="stylesheet" href="stylesheet.css">
 </head>
 
-<body>
+<body class="bg-dark-900 text-white font-outfit overflow-x-hidden">
+    <canvas id="three-canvas" class="fixed top-0 left-0 w-full h-full -z-10"></canvas>
+    <div id="cursor-glow" class="fixed w-80 h-80 rounded-full pointer-events-none opacity-20"
+        style="background: radial-gradient(circle, rgba(0,238,255,0.15) 0%, transparent 70%); transform: translate(-50%, -50%); z-index: -1;">
+    </div>
 
-    <header class="header">
-        <a href="#" class="logo">Portfolio</a>
-        <nav class="navbar">
-            <a href="#home" style="--i:1" class="active">Home</a>
-            <a href="#about" style="--i:2">About</a>
-            <a href="#services" style="--i:3">Skill</a>
-            <a href="#skills" style="--i:4">Portfolio</a>
-            <a href="#contact" style="--i:5">Contact</a>
+    <header id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+        <nav class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold tracking-tight group">
+                <span class="text-primary group-hover:text-white transition-colors duration-300">R</span><span
+                    class="text-white group-hover:text-primary transition-colors duration-300">eshi</span>
+            </a>
+            <div class="hidden md:flex items-center gap-1">
+                <a href="#home" class="nav-link active" data-nav>Home</a>
+                <a href="#about" class="nav-link" data-nav>About</a>
+                <a href="#experience" class="nav-link" data-nav>Experience</a>
+                <a href="#education" class="nav-link" data-nav>Education</a>
+                <a href="#skills" class="nav-link" data-nav>Skills</a>
+                <a href="#certifications" class="nav-link" data-nav>Certifications</a>
+                <a href="#portfolio" class="nav-link" data-nav>Portfolio</a>
+                <a href="#contact" class="nav-link" data-nav>Contact</a>
+            </div>
+            <button id="mobile-menu-btn" class="md:hidden text-3xl text-primary hover:text-white transition-colors"><i
+                    class='bx bx-menu'></i></button>
         </nav>
+        <div id="mobile-menu" class="md:hidden hidden bg-dark-800/95 backdrop-blur-xl border-t border-primary/10">
+            <div class="flex flex-col items-center py-6 gap-4">
+                <a href="#home" class="nav-link-mobile" data-nav>Home</a>
+                <a href="#about" class="nav-link-mobile" data-nav>About</a>
+                <a href="#experience" class="nav-link-mobile" data-nav>Experience</a>
+                <a href="#education" class="nav-link-mobile" data-nav>Education</a>
+                <a href="#skills" class="nav-link-mobile" data-nav>Skills</a>
+                <a href="#certifications" class="nav-link-mobile" data-nav>Certifications</a>
+                <a href="#portfolio" class="nav-link-mobile" data-nav>Portfolio</a>
+                <a href="#contact" class="nav-link-mobile" data-nav>Contact</a>
+            </div>
+        </div>
     </header>
 
-    <section class="home">
-        <div class="home-content">
-            <h3>Hello, It's Me</h3>
-            <h1>Rishi</h1>
-            <h3>And I'm a <span class="text">Full Stack Developer</span></h3>
-            <p>
-                I'm a web designer learning for 2 years.<br>
-                Expertise in website design, frontend design, cloud engineering, artificial intelligence and
-                many more.....
-            </p>
-
-            <div class="home-sci">
-                <a href="#" style="--i:7"><i class='bx bxl-facebook'></i></a>
-                <a href="#" style="--i:8"><i class='bx bxl-instagram'></i></a>
-                <a href="#" style="--i:9"><i class='bx bxl-whatsapp'></i></a>
+    <section id="home" class="relative min-h-screen flex items-center justify-center px-6 pt-20">
+        <div class="max-w-7xl mx-auto w-full grid lg:grid-cols-2 items-center gap-12">
+            <div class="home-content space-y-6">
+                <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase" id="greeting">&lt; Hello, It's
+                    Me /&gt;</p>
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-none" id="hero-name"><span
+                        class="block text-white">Reshi Arasu D</span></h1>
+                <h3 class="text-xl md:text-2xl font-light text-gray-300" id="hero-subtitle">And I'm a <span
+                        id="typed-text" class="text-primary font-semibold"></span></h3>
+                <p class="text-gray-400 font-inter text-base leading-relaxed max-w-lg" id="hero-desc">I'm a web designer
+                    learning for 3 years.<br>Expertise in website design, frontend design, cloud engineering, artificial
+                    intelligence, IoT and many more.....</p>
+                <div class="flex items-center gap-4 pt-2" id="social-icons">
+                    <a href="https://www.linkedin.com/in/reshiarasu-d" target="_blank" rel="noopener noreferrer"
+                        class="social-icon group" aria-label="LinkedIn"><i class='bx bxl-linkedin text-xl'></i></a>
+                    <a href="https://github.com/rishi-0111" target="_blank" rel="noopener noreferrer"
+                        class="social-icon group" aria-label="GitHub"><i class='bx bxl-github text-xl'></i></a>
+                    <a href="https://wa.me/919043432759" target="_blank" rel="noopener noreferrer"
+                        class="social-icon group" aria-label="WhatsApp"><i class='bx bxl-whatsapp text-xl'></i></a>
+                    <a href="mailto:reshiarasu@gmail.com" class="social-icon group" aria-label="Email"><i
+                            class='bx bx-envelope text-xl'></i></a>
+                </div>
+                <div class="pt-4 flex gap-4" id="hero-cta">
+                    <a href="#about" class="cta-button"><span>More About Me</span><i
+                            class='bx bx-right-arrow-alt text-xl'></i></a>
+                    <a href="#" class="cta-button" id="download-resume"><span>Download Resume</span><i
+                            class='bx bx-download text-xl'></i></a>
+                </div>
             </div>
-
-            <a href="#" class="btn-box">More About Me</a>
-        </div>
-        <span class="home-imgHover"></span>
-    </section>
-
-    <section class="about" id="about">
-        <div class="about-img">
-            <img src="about.jpg" alt="About Image" class="about-image">
-        </div>
-
-        <div class="about-text">
-            <h2>About<span>Me</span></h2>
-            <h4>Full Stack Developer!</h4>
-            <p>I'm a passionate Full Stack Developer with a strong foundation in both front-end and back-end
-                technologies.
-                I specialize in building scalable, user-friendly web applications using tools like React, Node.js,
-                Express, MongoDB, and SQL. I thrive in collaborative, Agile-driven environments where I can contribute
-                to solving real-world problems with clean, efficient, and secure code.</p>
-            <a href="#" class="btn-box">More About Me</a>
-        </div>
-    </section>
-
-    <section>
-        <div class="services" id="services">
-            <div class="container">
-                <h1 class="sub-title">My<span>Services</span></h1>
-                <div class="services-list">
-                    <div>
-                        <i class='bx bx-code-alt' style='color:#00eeff'></i>
-                        <h2>Web Development</h2>
-                        <p>I offer professional web development services focused on creating intuitive, user-friendly,
-                            and
-                            visually compelling digital experiences.
-                            From user research and wireframing to high-fidelity designs and interactive prototypes, I
-                            ensure
-                            every product is both functional and engaging.</p>
-                        <a href="#" class="read">learn more</a>
+            <div class="hidden lg:flex justify-center items-center" id="hero-visual">
+                <div class="relative">
+                    <div
+                        class="w-72 h-72 xl:w-96 xl:h-96 rounded-full bg-gradient-to-br from-primary/20 to-cyan-900/20 blur-3xl absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                     </div>
-                    <div>
-                        <i class='bx bx-crop' style='color:#00eeff'></i>
-                        <h2>UI/UX Design</h2>
-                        <p>I offer professional UI/UX design services focused on creating intuitive, user-friendly, and
-                            visually compelling digital experiences.
-                            From user research and wireframing to high-fidelity designs and interactive prototypes, I
-                            ensure
-                            every product is both functional and engaging.</p>
-                        <a href="#" class="read">learn more</a>
-                    </div>
-                    <div>
-                        <i class='bx bxl-apple' style='color:#00eeff'></i>
-                        <h2>Mobile Development</h2>
-                        <p>I offer professional mobile development services focused on creating intuitive,
-                            user-friendly, and
-                            visually compelling digital experiences.
-                            From user research and wireframing to high-fidelity designs and interactive prototypes, I
-                            ensure
-                            every product is both functional and engaging.</p>
-                        <a href="#" class="read">learn more</a>
+                    <div
+                        class="hero-code-block relative bg-dark-800/60 backdrop-blur-xl rounded-2xl border border-primary/20 p-8 shadow-2xl shadow-primary/5">
+                        <div class="flex items-center gap-2 mb-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <pre class="text-sm font-mono"><code><span class="text-purple-400">const</span> <span class="text-primary">developer</span> = {
+  <span class="text-green-400">name</span>: <span class="text-yellow-300">"Reshi Arasu D"</span>,
+  <span class="text-green-400">role</span>: <span class="text-yellow-300">"Full Stack Dev"</span>,
+  <span class="text-green-400">location</span>: <span class="text-yellow-300">"Kumbakonam, TN"</span>,
+  <span class="text-green-400">skills</span>: [
+    <span class="text-yellow-300">"Java"</span>, <span class="text-yellow-300">"SQL"</span>, <span class="text-yellow-300">"IoT"</span>,
+    <span class="text-yellow-300">"Cloud"</span>, <span class="text-yellow-300">"AI/ML"</span>
+  ],
+  <span class="text-green-400">gpa</span>: <span class="text-purple-400">7.57</span>,
+  <span class="text-green-400">available</span>: <span class="text-purple-400">true</span>
+};</code></pre>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-
-    <h1 class="sub-title">My<span>Skills</span></h1>
-
-    <section class="skills-section">
-        <div class="container1">
-            <h1 class="heading1">Technical Skills</h1>
-            <div class="Technical-bars">
-                <div class="bar">
-                    <i class='bx bxl-html5' style='color:#c95d2e'></i>
-                    <div class="info">
-                        <span>HTML</span>
-                    </div>
-                    <div class="progress-line html">
-                        <span></span>
-                    </div>
-                </div>
-                <div class="bar">
-                    <i class='bx bxl-css3' style='color:#147bbc'></i>
-                    <div class="info">
-                        <span>CSS</span>
-                    </div>
-                    <div class="progress-line css">
-                        <span></span>
-                    </div>
-                </div>
-                <div class="bar">
-                    <i class='bx bxl-javascript' style='color:#00eeff'></i>
-                    <div class="info">
-                        <span>Javascript</span>
-                    </div>
-                    <div class="progress-line javascript">
-                        <span></span>
-                    </div>
-                </div>
-                <div class="bar">
-                    <i class='bx bxl-java' style='color:#b9c92e'></i>
-                    <div class="info">
-                        <span>Java</span>
-                    </div>
-                    <div class="progress-line java">
-                        <span></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container1">
-            <h1 class="heading1">Professional Skills</h1>
-            <div class="radial-bars">
-                <div class="radial-bar">
-                    <svg viewBox="0 0 200 200">
-                        <circle class="progress-bar" cx="100" cy="100" r="80"></circle>
-                        <circle class="path path-1" cx="100" cy="100" r="80"></circle>
-                    </svg>
-                    <div class="percentage">90%</div>
-                    <div class="text">Creativity</div>
-                </div>
-
-                <div class="radial-bar">
-                    <svg viewBox="0 0 200 200">
-                        <circle class="progress-bar" cx="100" cy="100" r="80"></circle>
-                        <circle class="path path-2" cx="100" cy="100" r="80"></circle>
-                    </svg>
-                    <div class="percentage">95%</div>
-                    <div class="text">Communication</div>
-                </div>
-
-                <div class="radial-bar">
-                    <svg viewBox="0 0 200 200">
-                        <circle class="progress-bar" cx="100" cy="100" r="80"></circle>
-                        <circle class="path path-3" cx="100" cy="100" r="80"></circle>
-                    </svg>
-                    <div class="percentage">90%</div>
-                    <div class="text">Problem Solving</div>
-                </div>
-
-                <div class="radial-bar">
-                    <svg viewBox="0 0 200 200">
-                        <circle class="progress-bar" cx="100" cy="100" r="80"></circle>
-                        <circle class="path path-4" cx="100" cy="100" r="80"></circle>
-                    </svg>
-                    <div class="percentage">85%</div>
-                    <div class="text">TeamWork</div>
-                </div>
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-primary/60"
+            id="scroll-indicator">
+            <span class="text-xs tracking-widest uppercase">Scroll</span>
+            <div class="w-5 h-8 rounded-full border-2 border-primary/40 flex justify-center pt-1">
+                <div class="scroll-dot w-1.5 h-1.5 rounded-full bg-primary"></div>
             </div>
         </div>
     </section>
-    <section>
-        <div id="portfolio" id="project">
-            <div class="main-text" id="project">
-                <h2>Latest <span>Project</span> </h2>
-                <div class="portfolio-content">
-                    <div class="row">
-                        <img src="ui.jpg">
-                        <div class="layer">
-                            <h5>UI/UX Design</h5>
-                            <p>Redesigned the UI/UX of a [mobile/web] application to enhance user experience,
-                                accessibility, and visual appeal. Conducted user research, created wireframes, and built
-                                interactive prototypes using Figma.
-                                Focused on improving navigation flow and usability, resulting in a more intuitive
-                                interface. Applied design principles and responsive layouts to ensure consistency across
-                                devices.</p>
-                            <a href="#"><i class='bx bx-link-external' style='color:#00eeff'></i></a>
+
+    <section id="about" class="relative py-24 px-6">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 items-center gap-16">
+            <div class="about-img-wrapper" id="about-img">
+                <div class="relative group">
+                    <div
+                        class="absolute -inset-4 bg-gradient-to-r from-primary/20 to-cyan-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    </div>
+                    <div class="relative overflow-hidden rounded-2xl border border-primary/20">
+                        <img src="about.jpeg" alt="Reshi Arasu D"
+                            class="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-900/80 via-transparent to-transparent">
                         </div>
                     </div>
-                    <div class="row">
-                        <img src="web.jpg">
-                        <div class="layer">
-                            <h5>Weather Application</h5>
-                            <p>I developed a responsive weather application that provides real-time weather information
-                                for any location using the OpenWeatherMap API. The app features temperature, humidity,
-                                wind speed, and weather conditions with support for both city-based search and automatic
-                                location detection. Designed with a clean and intuitive UI, it ensures a smooth user
-                                experience across devices. This project enhanced my skills in API integration,
-                                asynchronous JavaScript, and building user-centric web interfaces.</p>
-                            <a href="#"><i class='bx bx-link-external' style='color:#00eeff'></i></a>
-                        </div>
+                    <div
+                        class="absolute -right-4 top-8 bg-dark-800/90 backdrop-blur-xl border border-primary/20 rounded-xl px-4 py-3 shadow-xl floating-badge">
+                        <p class="text-primary text-2xl font-bold">3+</p>
+                        <p class="text-gray-400 text-xs">Years Exp</p>
                     </div>
-                    <div class="row">
-                        <img src="summa.jpg">
-                        <div class="layer">
-                            <h5>Medical Application</h5>
-                            <p>I developed a medical application aimed at improving healthcare accessibility and patient
-                                engagement. The app allows users to book appointments, access medical records, receive
-                                medication reminders, and consult doctors through a secure platform. Designed with a
-                                user-friendly interface and responsive layout, the application ensures smooth navigation
-                                for both patients and healthcare providers. This project helped me gain valuable
-                                experience in handling sensitive data securely, implementing real-time notifications,
-                                and developing solutions tailored to the healthcare domain.</p>
-                            <a href="#"><i class='bx bx-link-external' style='color:#00eeff'></i></a>
+                    <div
+                        class="absolute -left-4 bottom-12 bg-dark-800/90 backdrop-blur-xl border border-primary/20 rounded-xl px-4 py-3 shadow-xl floating-badge">
+                        <p class="text-primary text-2xl font-bold">7.57</p>
+                        <p class="text-gray-400 text-xs">GPA</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text-content space-y-6" id="about-text">
+                <div>
+                    <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase mb-2">Who I Am</p>
+                    <h2 class="text-4xl md:text-5xl font-bold">About <span class="text-primary">Me</span></h2>
+                </div>
+                <div class="h-1 w-16 bg-gradient-to-r from-primary to-cyan-400 rounded-full"></div>
+                <h4 class="text-xl text-primary/90 font-semibold">Software Developer & AI Enthusiast</h4>
+                <p class="text-gray-400 font-inter leading-relaxed">Eager to begin my career as a Software Developer,
+                    with a strong willingness to learn, adapt to new technologies, and contribute to real-world
+                    solutions while continuously growing through new opportunities.</p>
+                <p class="text-gray-400 font-inter leading-relaxed">Currently pursuing B.E. in Computer Science and
+                    Engineering with specialization in Artificial Intelligence at K.M.D Engineering College. Passionate
+                    about IoT, Cloud Architecture, and building innovative solutions.</p>
+                <div class="flex gap-4 items-center">
+                    <div>
+                        <p class="text-2xl font-bold text-primary">📍</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 uppercase tracking-wider">Location</p>
+                        <p class="text-white">Kumbakonam, Thanjavur, India</p>
+                    </div>
+                </div>
+                <a href="#contact" class="cta-button inline-flex mt-4"><span>Let's Talk</span><i
+                        class='bx bx-conversation text-xl'></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="relative py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-header">
+                <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase mb-2">My Journey</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Work <span class="text-primary">Experience</span></h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-primary to-cyan-400 rounded-full mx-auto mt-4"></div>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="experience-card group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                            <div>
+                                <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                                    Software Developer Intern</h3>
+                                <p class="text-primary/80 font-semibold">Infosys Springboard</p>
+                            </div>
+                            <div class="text-gray-400 text-sm mt-2 md:mt-0">Nov 2025 - Feb 2026</div>
+                        </div>
+                        <ul class="space-y-2 text-gray-400 font-inter text-sm">
+                            <li class="flex gap-3"><i
+                                    class='bx bx-chevron-right text-primary text-xl flex-shrink-0'></i><span>Developed
+                                    Java-based Smart Procurement & Vendor Management System</span></li>
+                            <li class="flex gap-3"><i
+                                    class='bx bx-chevron-right text-primary text-xl flex-shrink-0'></i><span>Worked on
+                                    Java and SQL for efficient vendor, order, and payment management</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="relative py-24 px-6 bg-dark-800/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-header">
+                <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase mb-2">Academic Background</p>
+                <h2 class="text-4xl md:text-5xl font-bold">My <span class="text-primary">Education</span></h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-primary to-cyan-400 rounded-full mx-auto mt-4"></div>
+            </div>
+            <div class="max-w-4xl mx-auto space-y-8">
+                <div class="education-card group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-500">
+                                <i class='bx bxs-graduation text-3xl text-primary'></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                    <div>
+                                        <h3
+                                            class="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                                            Bachelor of Engineering</h3>
+                                        <p class="text-primary/80 font-semibold">Computer Science and Engineering</p>
+                                        <p class="text-gray-400 text-sm">K.M.D Engineering College</p>
+                                    </div>
+                                    <div class="text-gray-400 text-sm mt-2 md:mt-0">Sept 2023 - Present</div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex items-center gap-3"><i class='bx bx-star text-primary'></i><span
+                                            class="text-gray-300 font-inter text-sm">Specializing Honors in Artificial
+                                            Intelligence</span></div>
+                                    <div class="flex items-center gap-3"><i class='bx bx-trophy text-primary'></i><span
+                                            class="text-gray-300 font-inter text-sm"><strong
+                                                class="text-white">GPA:</strong> 7.57 / 10.0</span></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-    </section>
-    <section class="contact" id="contact">
-        <div class="contact-text">
-            <h2>Contact<span> Me</span></h2>
-            <h4>Let's work Together</h4>
-            <p>I'm always open to collaborating on exciting projects, exploring innovative ideas, or just having a
-                meaningful tech conversation.
-                Whether you have a job opportunity, a freelance project, or an idea you'd like to discuss—feel free to
-                reach out!</p>
-            <div class="contact-list">
-                <li><i class='bx bxs-send'></i>contact@gmail.com</li>
-                <li><i class='bx bxs-phone'></i>0123456789</li>
-
-            </div>
-            <div class="contact-icons">
-                <a href=""><i class='bx bxl-facebook-circle'></i></a>
-                <a href=""><i class='bx bxl-twitter'></i></a>
-                <a href=""><i class='bx bxl-instagram'></i></a>
-                <a href=""><i class='bx bxl-linkedin'></i></a>
+                <div class="education-card group">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-start gap-4">
+                            <div
+                                class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 group-hover:scale-110 transition-all duration-500">
+                                <i class='bx bxs-school text-3xl text-primary'></i>
+                            </div>
+                            <div class="flex-1">
+                                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-3">
+                                    <div>
+                                        <h3
+                                            class="text-xl font-bold text-white group-hover:text-primary transition-colors">
+                                            Higher Secondary School</h3>
+                                        <p class="text-gray-400 text-sm">A.R.K Matriculation Higher Secondary School</p>
+                                    </div>
+                                    <div class="text-gray-400 text-sm mt-2 md:mt-0">May 2023</div>
+                                </div>
+                                <div class="flex items-center gap-3"><i class='bx bx-trophy text-primary'></i><span
+                                        class="text-gray-300 font-inter text-sm"><strong
+                                            class="text-white">Percentage:</strong> 81.67%</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="contact-form">
-            <form action="">
-                <input type="" placeholder="Enter Name" required>
-                <input type="email" placeholder="Enter you Email" required>
-                <input type="" placeholder="Enter Your Subject">
-                <textarea name="" id="" cols="40" rows="10" placeholder="Enter Your Message" required></textarea>
-                <input type="submit" value="submit" class="send">
-            </form>
+    </section>
+
+    <section id="skills" class="relative py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-header">
+                <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase mb-2">My Expertise</p>
+                <h2 class="text-4xl md:text-5xl font-bold">My <span class="text-primary">Skills</span></h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-primary to-cyan-400 rounded-full mx-auto mt-4"></div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="skill-panel bg-dark-800/40 backdrop-blur-xl rounded-2xl border border-primary/10 p-8"
+                    id="tech-skills">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3"><i
+                            class='bx bx-code-block text-primary text-3xl'></i>Technical Skills</h3>
+                    <div class="space-y-6">
+                        <div class="skill-bar">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center gap-3"><i
+                                        class='bx bxl-java text-2xl text-red-500'></i><span
+                                        class="font-medium">Java</span></div><span
+                                    class="text-primary text-sm font-semibold">85%</span>
+                            </div>
+                            <div class="h-2 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center gap-3"><i
+                                        class='bx bx-data text-2xl text-blue-400'></i><span class="font-medium">SQL
+                                        (Basics)</span></div><span class="text-primary text-sm font-semibold">75%</span>
+                            </div>
+                            <div class="h-2 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full rounded-full" style="width: 0%" data-width="75%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center gap-3"><i
+                                        class='bx bx-chip text-2xl text-green-400'></i><span
+                                        class="font-medium">IoT</span></div><span
+                                    class="text-primary text-sm font-semibold">80%</span>
+                            </div>
+                            <div class="h-2 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full rounded-full" style="width: 0%" data-width="80%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center gap-3"><i
+                                        class='bx bxl-bootstrap text-2xl text-purple-500'></i><span
+                                        class="font-medium">Bootstrap</span></div><span
+                                    class="text-primary text-sm font-semibold">70%</span>
+                            </div>
+                            <div class="h-2 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full rounded-full" style="width: 0%" data-width="70%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center gap-3"><i
+                                        class='bx bxl-nodejs text-2xl text-green-500'></i><span
+                                        class="font-medium">Node.js</span></div><span
+                                    class="text-primary text-sm font-semibold">65%</span>
+                            </div>
+                            <div class="h-2 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full rounded-full" style="width: 0%" data-width="65%"></div>
+                            </div>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="flex justify-between items-center mb-2">
+                                <div class="flex items-center gap-3"><i
+                                        class='bx bxl-git text-2xl text-orange-500'></i><span class="font-medium">Git,
+                                        GitHub, Power BI</span></div><span
+                                    class="text-primary text-sm font-semibold">70%</span>
+                            </div>
+                            <div class="h-2 bg-dark-600 rounded-full overflow-hidden">
+                                <div class="progress-fill h-full rounded-full" style="width: 0%" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-panel bg-dark-800/40 backdrop-blur-xl rounded-2xl border border-primary/10 p-8"
+                    id="pro-skills">
+                    <h3 class="text-2xl font-bold mb-8 flex items-center gap-3"><i
+                            class='bx bx-brain text-primary text-3xl'></i>Soft Skills</h3>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="radial-skill text-center">
+                            <div class="relative w-28 h-28 mx-auto mb-3"><svg class="w-full h-full -rotate-90"
+                                    viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="50" stroke="rgba(0,238,255,0.1)" stroke-width="8"
+                                        fill="none" />
+                                    <circle cx="60" cy="60" r="50" stroke="url(#g1)" stroke-width="8" fill="none"
+                                        stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round"
+                                        class="radial-progress" data-offset="15.7" />
+                                    <defs>
+                                        <linearGradient id="g1">
+                                            <stop offset="0%" style="stop-color:#00eeff" />
+                                            <stop offset="100%" style="stop-color:#00ff88" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center"><span
+                                        class="text-xl font-bold text-primary">95%</span></div>
+                            </div>
+                            <p class="text-sm text-gray-300 font-medium">Communication</p>
+                        </div>
+                        <div class="radial-skill text-center">
+                            <div class="relative w-28 h-28 mx-auto mb-3"><svg class="w-full h-full -rotate-90"
+                                    viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="50" stroke="rgba(0,238,255,0.1)" stroke-width="8"
+                                        fill="none" />
+                                    <circle cx="60" cy="60" r="50" stroke="url(#g2)" stroke-width="8" fill="none"
+                                        stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round"
+                                        class="radial-progress" data-offset="31.4" />
+                                    <defs>
+                                        <linearGradient id="g2">
+                                            <stop offset="0%" style="stop-color:#00eeff" />
+                                            <stop offset="100%" style="stop-color:#a855f7" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center"><span
+                                        class="text-xl font-bold text-primary">90%</span></div>
+                            </div>
+                            <p class="text-sm text-gray-300 font-medium">Problem Solving</p>
+                        </div>
+                        <div class="radial-skill text-center">
+                            <div class="relative w-28 h-28 mx-auto mb-3"><svg class="w-full h-full -rotate-90"
+                                    viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="50" stroke="rgba(0,238,255,0.1)" stroke-width="8"
+                                        fill="none" />
+                                    <circle cx="60" cy="60" r="50" stroke="url(#g3)" stroke-width="8" fill="none"
+                                        stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round"
+                                        class="radial-progress" data-offset="47.1" />
+                                    <defs>
+                                        <linearGradient id="g3">
+                                            <stop offset="0%" style="stop-color:#f59e0b" />
+                                            <stop offset="100%" style="stop-color:#00eeff" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center"><span
+                                        class="text-xl font-bold text-primary">85%</span></div>
+                            </div>
+                            <p class="text-sm text-gray-300 font-medium">Adaptability</p>
+                        </div>
+                        <div class="radial-skill text-center">
+                            <div class="relative w-28 h-28 mx-auto mb-3"><svg class="w-full h-full -rotate-90"
+                                    viewBox="0 0 120 120">
+                                    <circle cx="60" cy="60" r="50" stroke="rgba(0,238,255,0.1)" stroke-width="8"
+                                        fill="none" />
+                                    <circle cx="60" cy="60" r="50" stroke="url(#g4)" stroke-width="8" fill="none"
+                                        stroke-dasharray="314" stroke-dashoffset="314" stroke-linecap="round"
+                                        class="radial-progress" data-offset="31.4" />
+                                    <defs>
+                                        <linearGradient id="g4">
+                                            <stop offset="0%" style="stop-color:#ec4899" />
+                                            <stop offset="100%" style="stop-color:#00eeff" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="absolute inset-0 flex items-center justify-center"><span
+                                        class="text-xl font-bold text-primary">90%</span></div>
+                            </div>
+                            <p class="text-sm text-gray-300 font-medium">Time Management</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
-    <div class="last-text">
-        <p>Developed with love by Rishi @ 2025</p>
-    </div>
-    <a href="#" class="top"><i class='bx bx-up-arrow-alt'></i></a>
 
+    <section id="certifications" class="relative py-24 px-6 bg-dark-800/20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-header">
+                <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase mb-2">Achievements</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Certifications & <span class="text-primary">Awards</span>
+                </h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-primary to-cyan-400 rounded-full mx-auto mt-4"></div>
+            </div>
+
+            <!-- NPTEL Certifications -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i
+                        class='bx bxs-graduation text-primary text-3xl'></i>NPTEL Certifications</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- NPTEL Card 1 -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-primary/10 to-cyan-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                                        <i class='bx bxs-user-voice text-4xl text-primary'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">Enhancing Soft Skills</h4>
+                                    <p class="text-primary/80 text-sm font-semibold">and Personality</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-primary/20 rounded-full text-xs text-primary font-semibold">
+                                        ELITE</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-primary/20 to-cyan-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bxs-certification text-3xl text-primary'></i>
+                                            <span class="text-xs text-primary font-bold">NPTEL</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">Enhancing Soft Skills and
+                                            Personality (ELITE)</h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Communication
+                                                    Skills</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Leadership
+                                                    Development</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Personality
+                                                    Enhancement</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Professional
+                                                    Ethics</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Elite Certification</span>
+                                        <i class='bx bx-badge-check text-primary text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NPTEL Card 2 -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-primary/10 to-cyan-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                                        <i class='bx bxs-cloud text-4xl text-primary'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">Cloud Computing</h4>
+                                    <p class="text-primary/80 text-sm font-semibold">Distributed Systems</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-primary/20 rounded-full text-xs text-primary font-semibold">
+                                        NPTEL</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-primary/20 to-cyan-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bxs-certification text-3xl text-primary'></i>
+                                            <span class="text-xs text-primary font-bold">NPTEL</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">Cloud Computing and Distributed
+                                            Systems</h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i class='bx bx-check text-primary'></i><span>Cloud
+                                                    Architecture</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Distributed
+                                                    Computing</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Virtualization</span>
+                                            </li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Scalability &
+                                                    Performance</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Certified</span>
+                                        <i class='bx bx-badge-check text-primary text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NPTEL Card 3 -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-primary/10 to-cyan-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4">
+                                        <i class='bx bx-code-curly text-4xl text-primary'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">Introduction to</h4>
+                                    <p class="text-primary/80 text-sm font-semibold">Programming in C</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-primary/20 rounded-full text-xs text-primary font-semibold">
+                                        NPTEL</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-primary/20 to-cyan-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bxs-certification text-3xl text-primary'></i>
+                                            <span class="text-xs text-primary font-bold">NPTEL</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">Introduction to Programming in C
+                                        </h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i class='bx bx-check text-primary'></i><span>C
+                                                    Programming Fundamentals</span></li>
+                                            <li class="flex gap-2"><i class='bx bx-check text-primary'></i><span>Data
+                                                    Structures</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-primary'></i><span>Algorithms & Logic</span>
+                                            </li>
+                                            <li class="flex gap-2"><i class='bx bx-check text-primary'></i><span>Problem
+                                                    Solving</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Certified</span>
+                                        <i class='bx bx-badge-check text-primary text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Other Certifications & Awards -->
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><i
+                        class='bx bx-trophy text-primary text-3xl'></i>Professional Certifications & Awards</h3>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- AWS Card -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-orange-500/10 to-yellow-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-orange-500/20 flex items-center justify-center mb-4">
+                                        <i class='bx bxs-cloud text-4xl text-orange-400'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">AWS Academy</h4>
+                                    <p class="text-orange-400 text-sm font-semibold">Graduate</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-orange-500/20 rounded-full text-xs text-orange-400 font-semibold">
+                                        Cloud Architecting</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-yellow-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bxl-aws text-3xl text-orange-400'></i>
+                                            <span class="text-xs text-orange-400 font-bold">AWS</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">AWS Academy Graduate - Cloud
+                                            Architecting</h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i class='bx bx-check text-orange-400'></i><span>AWS
+                                                    Core Services</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-orange-400'></i><span>Security &
+                                                    Networking</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-orange-400'></i><span>Database
+                                                    Solutions</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-orange-400'></i><span>Automation</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Amazon Web Services</span>
+                                        <i class='bx bx-badge-check text-orange-400 text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GCP Card -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-green-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-blue-500/20 flex items-center justify-center mb-4">
+                                        <i class='bx bxl-google-cloud text-4xl text-blue-400'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">Google Cloud</h4>
+                                    <p class="text-blue-400 text-sm font-semibold">Computing Foundation</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-blue-500/20 rounded-full text-xs text-blue-400 font-semibold">
+                                        GCP Certified</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-green-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bxl-google text-3xl text-blue-400'></i>
+                                            <span class="text-xs text-blue-400 font-bold">GCP</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">Google Cloud Computing
+                                            Foundation</h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i class='bx bx-check text-blue-400'></i><span>GCP
+                                                    Services</span></li>
+                                            <li class="flex gap-2"><i class='bx bx-check text-blue-400'></i><span>Cloud
+                                                    Infrastructure</span></li>
+                                            <li class="flex gap-2"><i class='bx bx-check text-blue-400'></i><span>Data &
+                                                    ML Services</span></li>
+                                            <li class="flex gap-2"><i class='bx bx-check text-blue-400'></i><span>Best
+                                                    Practices</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Google Cloud Platform</span>
+                                        <i class='bx bx-badge-check text-blue-400 text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Smart India Hackathon -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-purple-500/20 flex items-center justify-center mb-4">
+                                        <i class='bx bx-trophy text-4xl text-purple-400'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">Smart India</h4>
+                                    <p class="text-purple-400 text-sm font-semibold">Hackathon 2024</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-purple-500/20 rounded-full text-xs text-purple-400 font-semibold">
+                                        Finalist</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bxs-trophy text-3xl text-purple-400'></i>
+                                            <span class="text-xs text-purple-400 font-bold">2024</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">Smart India Hackathon Finalist
+                                        </h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-purple-400'></i><span>National Level
+                                                    Competition</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-purple-400'></i><span>Innovation & Problem
+                                                    Solving</span></li>
+                                            <li class="flex gap-2"><i class='bx bx-check text-purple-400'></i><span>Team
+                                                    Collaboration</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-purple-400'></i><span>Technical
+                                                    Excellence</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Institute of Engineers</span>
+                                        <i class='bx bx-badge-check text-purple-400 text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HackVrish -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-teal-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-4">
+                                        <i class='bx bx-code-alt text-4xl text-green-400'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">HackVrish</h4>
+                                    <p class="text-green-400 text-sm font-semibold">2025</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-green-500/20 rounded-full text-xs text-green-400 font-semibold">
+                                        Finalist</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-green-500/20 to-teal-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bx-code-block text-3xl text-green-400'></i>
+                                            <span class="text-xs text-green-400 font-bold">2025</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">HackVrish 2025 Finalist</h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-green-400'></i><span>National
+                                                    Hackathon</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-green-400'></i><span>Innovative
+                                                    Solutions</span></li>
+                                            <li class="flex gap-2"><i class='bx bx-check text-green-400'></i><span>Rapid
+                                                    Prototyping</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-green-400'></i><span>Competitive
+                                                    Coding</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">National Level</span>
+                                        <i class='bx bx-badge-check text-green-400 text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- IoT Workshop -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-cyan-500/20 flex items-center justify-center mb-4">
+                                        <i class='bx bx-chip text-4xl text-cyan-400'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">Thanjavur Zone</h4>
+                                    <p class="text-cyan-400 text-sm font-semibold">Finalist</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-cyan-500/20 rounded-full text-xs text-cyan-400 font-semibold">
+                                        IoT Workshop</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bx-chip text-3xl text-cyan-400'></i>
+                                            <span class="text-xs text-cyan-400 font-bold">IoT</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">Thanjavur Zone Finalist</h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i class='bx bx-check text-cyan-400'></i><span>IoT
+                                                    Workshop & Research</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-cyan-400'></i><span>Innovation
+                                                    Competition</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-cyan-400'></i><span>Hardware
+                                                    Integration</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-cyan-400'></i><span>Research Park
+                                                    Recognition</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Research Park</span>
+                                        <i class='bx bx-badge-check text-cyan-400 text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gold Medal -->
+                    <div class="flip-card h-72">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-amber-500/10 rounded-2xl">
+                                </div>
+                                <div
+                                    class="relative z-10 h-full flex flex-col items-center justify-center p-6 text-center">
+                                    <div
+                                        class="w-20 h-20 rounded-full bg-yellow-500/20 flex items-center justify-center mb-4">
+                                        <i class='bx bx-medal text-4xl text-yellow-400'></i>
+                                    </div>
+                                    <h4 class="text-lg font-bold text-white mb-2">Gold Medal</h4>
+                                    <p class="text-yellow-400 text-sm font-semibold">Winner</p>
+                                    <div
+                                        class="mt-4 px-3 py-1 bg-yellow-500/20 rounded-full text-xs text-yellow-400 font-semibold">
+                                        Best Physique</div>
+                                    <p class="text-gray-400 text-xs mt-4">Click to view details</p>
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-amber-500/20 rounded-2xl">
+                                </div>
+                                <div class="relative z-10 h-full flex flex-col justify-between p-6">
+                                    <div>
+                                        <div class="flex items-center justify-between mb-4">
+                                            <i class='bx bxs-medal text-3xl text-yellow-400'></i>
+                                            <span class="text-xs text-yellow-400 font-bold">🥇</span>
+                                        </div>
+                                        <h4 class="text-base font-bold text-white mb-3">Gold Medal - Best Physique</h4>
+                                        <ul class="space-y-2 text-xs text-gray-300">
+                                            <li class="flex gap-2"><i class='bx bx-check text-yellow-400'></i><span>59Kg
+                                                    Category</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-yellow-400'></i><span>Intramurals
+                                                    Competition</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-yellow-400'></i><span>College Sports
+                                                    Achievement</span></li>
+                                            <li class="flex gap-2"><i
+                                                    class='bx bx-check text-yellow-400'></i><span>Physical
+                                                    Excellence</span></li>
+                                        </ul>
+                                    </div>
+                                    <div class="flex items-center justify-between text-xs">
+                                        <span class="text-gray-400">Sports Achievement</span>
+                                        <i class='bx bx-badge-check text-yellow-400 text-2xl'></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="relative py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-header">
+                <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase mb-2">My Work</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Featured <span class="text-primary">Projects</span></h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-primary to-cyan-400 rounded-full mx-auto mt-4"></div>
+            </div>
+
+            <div class="space-y-12">
+                <!-- Project 1: Smart Home Automation Hub -->
+                <div class="project-block group">
+                    <div class="grid lg:grid-cols-5 gap-8 items-start">
+                        <div class="lg:col-span-2">
+                            <div
+                                class="relative overflow-hidden rounded-2xl border border-primary/20 group-hover:border-primary/40 transition-all duration-500">
+                                <img src="ui.jpg" alt="Smart Home Automation Hub"
+                                    class="w-full h-64 lg:h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500">
+                                </div>
+                                <div class="absolute top-4 right-4 flex gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-primary/20 backdrop-blur-sm rounded-full text-xs text-primary font-semibold border border-primary/30">IoT</span>
+                                    <span
+                                        class="px-3 py-1 bg-green-500/20 backdrop-blur-sm rounded-full text-xs text-green-400 font-semibold border border-green-500/30">Hardware</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-3 space-y-4">
+                            <div>
+                                <h3
+                                    class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                                    Smart AI-Based Home Automation Hub</h3>
+                                <p class="text-gray-400 font-inter text-sm leading-relaxed">Developed an IoT-based Smart
+                                    Hub to monitor and control connected devices in real time using sensor data,
+                                    automation logic, and centralized system management.</p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-chip'></i>Technologies Used
+                                </h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag">Arduino/ESP32</span>
+                                    <span class="tech-tag">IoT Sensors</span>
+                                    <span class="tech-tag">MQTT Protocol</span>
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Firebase</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-check-circle'></i>Key Features
+                                </h4>
+                                <ul class="space-y-1.5 text-sm text-gray-300">
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>Real-time device
+                                            monitoring and control via web dashboard</span></li>
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>Automated routines based
+                                            on sensor data (temperature, motion, light)</span></li>
+                                    <li class="flex gap-2"><i class='bx bx-chevron-right text-primary'></i><span>Remote
+                                            access through mobile-responsive interface</span></li>
+                                    <li class="flex gap-2"><i class='bx bx-chevron-right text-primary'></i><span>Energy
+                                            consumption tracking and optimization</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <a href="https://github.com/rishi-0111" target="_blank" rel="noopener noreferrer"
+                                    class="project-link"><i class='bx bxl-github text-lg'></i><span>View Code</span></a>
+                                <a href="#" class="project-link"><i class='bx bx-link-external text-lg'></i><span>Live
+                                        Demo</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Smart Travel Assistant -->
+                <div class="project-block group">
+                    <div class="grid lg:grid-cols-5 gap-8 items-start">
+                        <div class="lg:col-span-2 lg:order-2">
+                            <div
+                                class="relative overflow-hidden rounded-2xl border border-primary/20 group-hover:border-primary/40 transition-all duration-500">
+                                <img src="web.jpg" alt="Smart Travel Assistant"
+                                    class="w-full h-64 lg:h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500">
+                                </div>
+                                <div class="absolute top-4 right-4 flex gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-purple-500/20 backdrop-blur-sm rounded-full text-xs text-purple-400 font-semibold border border-purple-500/30">AI/ML</span>
+                                    <span
+                                        class="px-3 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full text-xs text-blue-400 font-semibold border border-blue-500/30">Web
+                                        App</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-3 lg:order-1 space-y-4">
+                            <div>
+                                <h3
+                                    class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                                    Smart Travel Assistant</h3>
+                                <p class="text-gray-400 font-inter text-sm leading-relaxed">Developed a smart travel
+                                    assistant application that provides location-based recommendations, real-time travel
+                                    information, and personalized guidance using AI-driven insights.
+                                </p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-chip'></i>Technologies Used
+                                </h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag">React Native</span>
+                                    <span class="tech-tag">Python/Flask</span>
+                                    <span class="tech-tag">TensorFlow</span>
+                                    <span class="tech-tag">Google Maps API</span>
+                                    <span class="tech-tag">OpenStreetMap</span>
+                                    <span class="tech-tag">MongoDB</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-check-circle'></i>Key Features
+                                </h4>
+                                <ul class="space-y-1.5 text-sm text-gray-300">
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>AI-driven personalized
+                                            travel recommendations</span></li>
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>Real-time location
+                                            tracking and route optimization</span></li>
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>ML-based prediction for
+                                            accommodation and POI suggestions</span></li>
+                                    <li class="flex gap-2"><i class='bx bx-chevron-right text-primary'></i><span>Budget
+                                            planning and expense tracking</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <a href="https://github.com/rishi-0111" target="_blank" rel="noopener noreferrer"
+                                    class="project-link"><i class='bx bxl-github text-lg'></i><span>View Code</span></a>
+                                <a href="#" class="project-link"><i class='bx bx-link-external text-lg'></i><span>Live
+                                        Demo</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Online Assignment & Test Management System -->
+                <div class="project-block group">
+                    <div class="grid lg:grid-cols-5 gap-8 items-start">
+                        <div class="lg:col-span-2">
+                            <div
+                                class="relative overflow-hidden rounded-2xl border border-primary/20 group-hover:border-primary/40 transition-all duration-500">
+                                <img src="summa.jpg" alt="Online Assignment System"
+                                    class="w-full h-64 lg:h-80 object-cover transition-transform duration-700 group-hover:scale-110">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/60 to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500">
+                                </div>
+                                <div class="absolute top-4 right-4 flex gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-orange-500/20 backdrop-blur-sm rounded-full text-xs text-orange-400 font-semibold border border-orange-500/30">Full
+                                        Stack</span>
+                                    <span
+                                        class="px-3 py-1 bg-cyan-500/20 backdrop-blur-sm rounded-full text-xs text-cyan-400 font-semibold border border-cyan-500/30">Real-time</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-3 space-y-4">
+                            <div>
+                                <h3
+                                    class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                                    Online Assignment & Test Management System</h3>
+                                <p class="text-gray-400 font-inter text-sm leading-relaxed">Developed a real-time Online
+                                    Assignment & Test Management System using Supabase with role-based access control
+                                    for teachers and students. Enabled live test assignments, instant submission
+                                    updates, and class-wise performance analytics with secure RLS implementation.</p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-chip'></i>Technologies Used
+                                </h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag">React.js</span>
+                                    <span class="tech-tag">Supabase</span>
+                                    <span class="tech-tag">PostgreSQL</span>
+                                    <span class="tech-tag">RLS (Row Level Security)</span>
+                                    <span class="tech-tag">Real-time Subscriptions</span>
+                                    <span class="tech-tag">Chart.js</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-check-circle'></i>Key Features
+                                </h4>
+                                <ul class="space-y-1.5 text-sm text-gray-300">
+                                    <li class="flex gap-2"><i class='bx bx-chevron-right text-primary'></i><span>Live
+                                            test assignments with real-time updates</span></li>
+                                    <li class="flex gap-2"><i class='bx bx-chevron-right text-primary'></i><span>Instant
+                                            submission updates using Supabase real-time subscriptions</span></li>
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>Class-wise performance
+                                            analytics and reporting</span></li>
+                                    <li class="flex gap-2"><i class='bx bx-chevron-right text-primary'></i><span>Secure
+                                            RLS (Row Level Security) implementation for data protection</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <a href="https://github.com/rishi-0111" target="_blank" rel="noopener noreferrer"
+                                    class="project-link"><i class='bx bxl-github text-lg'></i><span>View Code</span></a>
+                                <a href="#" class="project-link"><i class='bx bx-link-external text-lg'></i><span>Live
+                                        Demo</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Smart Procurement & Vendor Management (Infosys) -->
+                <div class="project-block group">
+                    <div class="grid lg:grid-cols-5 gap-8 items-start">
+                        <div class="lg:col-span-2 lg:order-2">
+                            <div
+                                class="relative overflow-hidden rounded-2xl border border-primary/20 group-hover:border-primary/40 transition-all duration-500 bg-gradient-to-br from-orange-500/10 to-yellow-500/10 flex items-center justify-center h-64 lg:h-80">
+                                <div class="text-center p-8">
+                                    <i class='bx bx-package text-8xl text-primary mb-4 opacity-20'></i>
+                                    <h4 class="text-xl font-bold text-white">Enterprise System</h4>
+                                    <p class="text-gray-400 text-sm mt-2">Infosys Internship Project</p>
+                                </div>
+                                <div class="absolute top-4 right-4 flex gap-2">
+                                    <span
+                                        class="px-3 py-1 bg-red-500/20 backdrop-blur-sm rounded-full text-xs text-red-400 font-semibold border border-red-500/30">Java</span>
+                                    <span
+                                        class="px-3 py-1 bg-blue-500/20 backdrop-blur-sm rounded-full text-xs text-blue-400 font-semibold border border-blue-500/30">SQL</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="lg:col-span-3 lg:order-1 space-y-4">
+                            <div>
+                                <h3
+                                    class="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:text-primary transition-colors">
+                                    Smart Procurement & Vendor Management System</h3>
+                                <p class="text-sm text-primary/80 font-semibold mb-2">Infosys Springboard Internship
+                                    Project</p>
+                                <p class="text-gray-400 font-inter text-sm leading-relaxed">Enterprise-grade Java
+                                    application for streamlining procurement processes, vendor management, order
+                                    tracking, and payment processing with robust database architecture.</p>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-chip'></i>Technologies Used
+                                </h4>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="tech-tag">Java</span>
+                                    <span class="tech-tag">SQL/MySQL</span>
+                                    <span class="tech-tag">JDBC</span>
+                                    <span class="tech-tag">Swing/JavaFX</span>
+                                    <span class="tech-tag">Maven</span>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <h4
+                                    class="text-sm font-semibold text-primary uppercase tracking-wider flex items-center gap-2">
+                                    <i class='bx bx-check-circle'></i>Key Features
+                                </h4>
+                                <ul class="space-y-1.5 text-sm text-gray-300">
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>Comprehensive vendor
+                                            database management</span></li>
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>Automated order
+                                            processing and tracking</span></li>
+                                    <li class="flex gap-2"><i class='bx bx-chevron-right text-primary'></i><span>Payment
+                                            management with transaction history</span></li>
+                                    <li class="flex gap-2"><i
+                                            class='bx bx-chevron-right text-primary'></i><span>Reporting and analytics
+                                            dashboard</span></li>
+                                </ul>
+                            </div>
+
+                            <div class="flex gap-3 pt-2">
+                                <a href="https://github.com/rishi-0111" target="_blank" rel="noopener noreferrer"
+                                    class="project-link"><i class='bx bxl-github text-lg'></i><span>View Code</span></a>
+                                <span class="text-xs text-gray-500 flex items-center gap-1 px-3 py-2"><i
+                                        class='bx bx-briefcase'></i>Internship Project</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View All Projects CTA -->
+            <div class="text-center mt-16">
+                <a href="https://github.com/rishi-0111" target="_blank" rel="noopener noreferrer"
+                    class="cta-button inline-flex"><span>View All Projects on GitHub</span><i
+                        class='bx bxl-github text-xl'></i></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="relative py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 section-header">
+                <p class="text-primary/80 font-inter text-sm tracking-[0.3em] uppercase mb-2">Get In Touch</p>
+                <h2 class="text-4xl md:text-5xl font-bold">Contact <span class="text-primary">Me</span></h2>
+                <div class="h-1 w-16 bg-gradient-to-r from-primary to-cyan-400 rounded-full mx-auto mt-4"></div>
+            </div>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div class="space-y-8" id="contact-info">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4">Let's Work <span class="text-primary">Together</span></h3>
+                        <p class="text-gray-400 font-inter leading-relaxed">I'm always open to collaborating on exciting
+                            projects or exploring innovative ideas. Feel free to reach out!</p>
+                    </div>
+                    <div class="space-y-4">
+                        <a href="mailto:reshiarasu@gmail.com" class="contact-info-item group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
+                                <i class='bx bx-envelope text-xl text-primary'></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-xs uppercase tracking-wider">Email</p>
+                                <p class="text-white group-hover:text-primary transition-colors">reshiarasu@gmail.com
+                                </p>
+                            </div>
+                        </a>
+                        <a href="tel:+919043432759" class="contact-info-item group">
+                            <div
+                                class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-all duration-300">
+                                <i class='bx bx-phone text-xl text-primary'></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-500 text-xs uppercase tracking-wider">Phone</p>
+                                <p class="text-white group-hover:text-primary transition-colors">+91 9043432759</p>
+                            </div>
+                        </a>
+                        <div class="contact-info-item">
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center"><i
+                                    class='bx bx-map text-xl text-primary'></i></div>
+                            <div>
+                                <p class="text-gray-500 text-xs uppercase tracking-wider">Location</p>
+                                <p class="text-white">Kumbakonam, Thanjavur - 604302, India</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 pt-4">
+                        <a href="https://www.linkedin.com/in/reshiarasu-d" target="_blank" rel="noopener noreferrer"
+                            class="social-icon group"><i class='bx bxl-linkedin text-xl'></i></a>
+                        <a href="https://github.com/rishi-0111" target="_blank" rel="noopener noreferrer"
+                            class="social-icon group"><i class='bx bxl-github text-xl'></i></a>
+                        <a href="https://wa.me/919043432759" target="_blank" rel="noopener noreferrer"
+                            class="social-icon group"><i class='bx bxl-whatsapp text-xl'></i></a>
+                        <a href="mailto:reshiarasu@gmail.com" class="social-icon group"><i
+                                class='bx bx-envelope text-xl'></i></a>
+                    </div>
+                </div>
+                <div class="bg-dark-800/40 backdrop-blur-xl rounded-2xl border border-primary/10 p-8" id="contact-form">
+                    <form action="" class="space-y-5">
+                        <div class="grid md:grid-cols-2 gap-5"><input type="text" placeholder="Your Name" required
+                                class="contact-input"><input type="email" placeholder="Your Email" required
+                                class="contact-input"></div>
+                        <input type="text" placeholder="Subject" class="contact-input">
+                        <textarea rows="6" placeholder="Your Message" required
+                            class="contact-input resize-none"></textarea>
+                        <button type="submit" class="cta-button w-full justify-center"><span>Send Message</span><i
+                                class='bx bx-send text-xl'></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="border-t border-primary/10 py-8 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-gray-500 font-inter text-sm">Developed with <span class="text-primary">&#9829;</span> by
+                Reshi Arasu D &copy; 2025</p>
+            <a href="#home"
+                class="w-10 h-10 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center hover:bg-primary hover:text-dark-900 transition-all duration-300"><i
+                    class='bx bx-up-arrow-alt text-xl'></i></a>
+        </div>
+    </footer>
     <script src="main.js"></script>
 </body>
 
