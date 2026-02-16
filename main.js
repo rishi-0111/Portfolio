@@ -89,9 +89,9 @@ if (!prefersReducedMotion) {
         gsap.from(header.children, { scrollTrigger: { trigger: header, start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 40, duration: 0.7, stagger: 0.1, ease: 'power3.out' });
     });
 
-    gsap.from('.experience-card', { scrollTrigger: { trigger: '#experience', start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.15, ease: 'power3.out' });
+    gsap.from('.experience-card', { scrollTrigger: { trigger: '#experience', start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.15, ease: 'power3.out', clearProps: 'all' });
     gsap.from('.education-card', { scrollTrigger: { trigger: '#education', start: 'top 90%', toggleActions: 'play none none none' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.15, ease: 'power3.out', clearProps: 'all' });
-    gsap.from('.flip-card', { scrollTrigger: { trigger: '#certifications', start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.1, ease: 'power3.out' });
+    gsap.from('.flip-card', { scrollTrigger: { trigger: '#certifications', start: 'top 80%', toggleActions: 'play none none reverse' }, opacity: 0, y: 60, scale: 0.95, duration: 0.8, stagger: 0.1, ease: 'power3.out', clearProps: 'all' });
 
     document.querySelectorAll('.progress-fill').forEach((bar) => {
         ScrollTrigger.create({ trigger: bar, start: 'top 85%', onEnter: () => { gsap.to(bar, { width: bar.dataset.width, duration: 1.5, ease: 'power3.out' }); }, once: true });

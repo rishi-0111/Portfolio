@@ -418,6 +418,8 @@ section::before {
 .flip-card {
     perspective: 1000px;
     cursor: pointer;
+    opacity: 1;
+    visibility: visible;
 }
 
 .flip-card-inner {
@@ -443,10 +445,14 @@ section::before {
     backface-visibility: hidden;
     border-radius: 1rem;
     border: 1px solid rgba(var(--primary-rgb), 0.1);
-    background: rgba(13, 18, 36, 0.6);
+    background: rgba(13, 18, 36, 0.8);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
 }
 
 .flip-card-front {
@@ -455,12 +461,29 @@ section::before {
 
 .flip-card-back {
     transform: rotateY(180deg);
+    z-index: 1;
+    background: rgba(13, 18, 36, 0.95);
 }
 
 .flip-card:hover .flip-card-front,
 .flip-card:hover .flip-card-back {
     border-color: rgba(var(--primary-rgb), 0.3);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 40px rgba(var(--primary-rgb), 0.1);
+}
+
+.flip-card-back .relative {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.flip-card-back ul {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.flip-card-back li {
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
